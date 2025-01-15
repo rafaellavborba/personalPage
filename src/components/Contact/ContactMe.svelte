@@ -83,14 +83,26 @@
     &__logo {
         height: 75px;
         width: 75px;
+        box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
     }
     &__socials {
         display: flex;
-        margin-top: 14px;
+        align-items: center;
+        margin-top: 18px;
+        overflow: visible;
     }
     &__item {
+        cursor: pointer;
         margin-right: 14px;
+        display: flex;
+        align-items: baseline;
+        scale: 1;
+        transition: all 0.3s ease-in-out;
 
+        &:hover{
+            transform: scale(1.02);
+            transition: all 0.2s ease-in-out;
+        }
         &:last-child {
             margin-right: 0;
         }
@@ -101,11 +113,16 @@
     transition: all ease-in-out 0.5s;
     opacity: 1;
 }
-@media(min-width: 768px){
+@media(min-width: 425px){
     .contact {
-        &__first {
+        &__first{
             flex-direction: row;
+            align-items: center;
+        }
+        &__socials{
+            margin-top: 0;
         }
     }
 }
+
 </style>

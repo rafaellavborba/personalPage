@@ -1,4 +1,13 @@
 <script>
+    
+import { observeVisibility } from '../../actions/observeVisibility';
+import { visibleComponents } from '../../stores/visibilityStore';
+
+export let id; 
+let isVisible = false;
+
+$: isVisible = $visibleComponents.has(id);
+
   let isDragging = false;
   let startX;
   let scrollLeft;
@@ -43,8 +52,8 @@
 </script>
 
 <section 
-    id="career" 
-    class="experience" 
+    id={id} class="experience"  class:visible={isVisible} use:observeVisibility={{ id }}
+    
     
 >
    <h2 class="experience__title">My Journey: Crafting Digital Experiences</h2>
@@ -69,12 +78,16 @@
 
 <style lang="scss" scoped>
 .experience {
+    margin: 40px 0;
     text-align: center;
-    min-height: 500px;
+    min-height: 575px;
     height: auto;
     overflow: hidden; 
     cursor: grab;
-
+    position: relative;
+    transition: all ease-in-out 0.3s;
+    transform: scale(1);
+    opacity: 0.5;
     &__title{
         margin: 40px 0;
     }
@@ -92,15 +105,13 @@
         background-color: transparent;
         margin: 20px 0;
         width: 100vw;
-        min-height: 600px;
+        min-height: 340px;
         height: auto;
-        font-size: 1.2rem;
-
         overflow-x: scroll;
         top: 113px;
         position: absolute;
         z-index: 2;
-        padding-right: 80px;
+        padding: 0 60px 0 20px;
         &::-webkit-scrollbar {
             display: none; 
         }
@@ -124,12 +135,14 @@
         background: #6a4848;
     }
     &__year{
-
+        font-size: 0.8rem;
+        font-style: italic;
     }
     &__desc{
         text-align: start;
         scale: (1);
         transition: all 0.3s ease-in;
+        font-size: 1rem;
         &:hover{
             transform: scale(1.02);
             transition: all 0.3s ease-out;
@@ -137,8 +150,14 @@
         }
     }
 }
+.experience.visible{
+    transform: scale(1.02);
+    transition: all ease-in-out 0.5s;
+    opacity: 1;
+}
 @media(min-width: 425px){
     .experience{
+        height: 650px;
         &__item{
             display: flex;
             flex-direction: column;
@@ -147,13 +166,30 @@
             max-width: 300px;
             margin-right: 24px;
         }
+        &__desc{
+            font-size: 1.2rem;
+        }
+        &__year{
+            font-size: 1rem;
+        }
     }
 }
 @media(min-width: 1024px){
     .experience{
-        height: 700px;
+        margin: 60px 0;
+        height: 800px;
         &__title{
             margin: 60px 0;
+        }
+        &__desc{
+            font-size: 1.4rem;
+        }
+        &__content {
+            padding-left: 40px;
+            top: 120px;
+        }
+        &__line{
+            top: 145px;
         }
     }
 }

@@ -65,17 +65,19 @@
         font-size: 0.8rem;
         bottom: 30%;
         overflow: hidden;
-        height: 3rem;
+        min-height: 4rem;
     }
     &__text{
         position: absolute;
         opacity: 0;
         transform: translateY(150%);
         transition: all 1s ease-in-out;
+        height: fit-content;
     }
     &__text-active {
         opacity: 1;
         transform: translateY(0); 
+        overflow: visible;
     }
 
     &__text-exit {
@@ -97,7 +99,7 @@
             left: 20px;
             bottom: 25%;
             font-size: 1rem;
-            height: 4rem;
+            height: 5rem;
             width: 235px;
         }
     }
@@ -143,6 +145,7 @@
             font-size: 1.4rem;
             bottom: 100px;
             left: 40px;
+            height: 7.5rem;
         }
     }
 }
@@ -159,6 +162,7 @@
             font-size: 1.8rem;
             bottom: 80px;
             left: 100px;
+            height: 9rem;
         }
     }
 }
@@ -166,7 +170,6 @@
     .bannerMain{
         &__animation{
             left: 130px;
-            height: 7rem;
 
         }
     }

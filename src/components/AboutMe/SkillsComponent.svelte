@@ -10,182 +10,146 @@
     const skills = [
         {
             image: 'typescript.svg',
-            alt: 'TypeScript'
+            alt: 'TypeScript',
+            since: '2022'
         },
         {
             image: 'javascript_logo.webp',
-            alt: 'JavaScript'
+            alt: 'JavaScript',
+            since: '2022'
         },
         {
             image: 'vuejs.webp',
-            alt: 'Vue'
-        },
-        {
-            image: 'svelte_logo.webp',
-            alt: 'Svelte'
+            alt: 'Vue',
+            since: '2022'
         },
         {
             image: 'react.svg',
-            alt: 'React'
+            alt: 'React',
+            since: '2022'
+        },
+        {
+            image: 'svelte_logo.webp',
+            alt: 'Svelte',
+            since: '2025'
         },
         {
             image: 'native.png',
-            alt: 'React Native'
+            alt: 'React Native',
+            since: '2025'
         },
 
     ]
+    
+    const seniority = (startParam) => {
+        const actualDate = new Date()
+        const start = new Date(startParam)
+
+        return actualDate.getFullYear() - start.getFullYear()
+    }
+
+    const filledStars = (years) => {
+       return Array.from({length: 5}, (_, i) => i < years)
+    }
+    
 </script>
 
 <section id={id} class="skills" class:visible={isVisible} use:observeVisibility={{ id }}>
     <div class="container skills__content">
         <h2 class="skills__title">Skills</h2>
-    </div>
-    <div class="skills__logo">
-    {#each skills as item}
-        <img src={'src/assets/icon/' + item.image} alt={item.alt} height="22" class="skills__image"/>
-    {/each}
+        <div class="skills__itens">
+            {#each skills as item}
+                <div class="skills__item">
+                    <div class="skills__first">
+                        {#if item?.image}
+                            <img class="skills__logo" src={`src/assets/icon/${item.image}`} alt={item.alt} height="32"/>
+                        {/if}
+                        {#if item?.alt}
+                            <span class="skills__name">{item.alt}</span>
+                        {/if}
+                    </div>
+                    <div class="skills__senior">
+                        <div class="skills__stars-content">
+                            {#each filledStars(seniority(item.since)) as star}
+                                <div  class="skills__stars {star ? 'skills__stars-filled' : ''}">★</div>
+                            {/each}
+                        </div>
+                        
+                        <span class="skills__senior-years">
+                            {seniority(item.since)} {seniority(item.since) > 1 ? 'years' : 'year'}
+                        </span>
+                    </div>
+                </div>
+            {/each}
+        </div>
     </div>
 </section>
 
 <style lang="scss" scoped>
-.skills {
-    background: url('../../assets/images/banner_skills.png') no-repeat;
-    background-size: 100%;
-    background-position-x: 100%;
-    background-position-y: 100%;
-    min-height: 180px;
-    max-height: 100vh;
-    height: auto;
-    width: 100%;
+.skills{
     margin: 40px 0;
-    position: relative;
-    &__logo{
-        position: absolute;
-        left: 44%;
-        bottom: 10%;
-        display: flex;
-        flex-wrap: wrap;
-        width: 125px;
-        
-    }
-    &__image{
-        margin: 8px;
-    }
+    width: 100%;
     &__content {
-        padding-top: 40px;
-        padding-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
-}
-.skills.visible{
-    transform: scale(1.02);
-    transition: all ease-in-out 0.5s;
-    opacity: 1;
-}
-@media(min-width: 375px){
-    .skills {
-        height: 200px;
-        &__logo{
-            width: 140px;
-            bottom: 11%;
-        }
-        &__image{
-            height: 25px;
-        }
+    &__itens {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 24px;
+        justify-content: center;
+        align-items: center;
     }
-}
-
-@media(min-width: 425px){
-    .skills {
-        height: 240px;
-        &__logo{
-            width: 180px;
-        }
-        &__image{
-            height: 34px;
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+        scale: 1;
+        transition: all 0.5s ease-in-out;
+        width: 100%;
+        &:hover{
+            transform: scale(1.03);
+            transition: all 0.5s ease-in-out;
+            background-color: rgba(135, 123, 111, 0.2);
         }
     }
-}
-@media(min-width: 475px){
-    .skills {
-        &__logo{
-            bottom: 12%;
-        }
+    &__first{
+        display: flex;
+        align-items: center;
     }
-}
-@media(min-width: 500px){
-    .skills {
-        height: 280px;
-        &__image{
-            height: 38px;
-        }
+    &__logo{
+        height: 32px;
+        width: 32px;
+        margin-right: 12px;
     }
-}
-@media(min-width: 565px){
-    .skills {
-        height: 315px;
-        &__image{
-            height: 42px;
-        }
+    &__senior{
+        display: flex;
+        flex-direction: column;
+        text-align: right;
     }
-}
-@media(min-width: 625px){
-    .skills {
-        &__logo{
-            left: 48%;
-            bottom: 13%;
-        }
+    &__stars-content {
+        display: flex;
+        align-items: center;
     }
-}
-@media(min-width: 700px){
-    .skills {
-        height: 400px;
-        &__logo{
-            bottom: 14%;
-        }
+    &__stars{
+        font-size: 1rem;
+        color: rgba(0, 0, 0, 0.2);
     }
-}
-@media(min-width: 768px){
-    .skills {
-        &__logo{
-            left: 50%;
-        }
+    &__stars-filled{
+        color: #6a4848;
     }
-}
-@media(min-width: 845px){
-    .skills {
-        height: 475px;
-        &__logo{
-            bottom: 14%;
-        }
+    &__senior-years{
+        font-size: 0.8rem;
+        font-style: italic;
     }
 }
 @media(min-width: 1024px){
-    .skills {
-        height: 575px;
-        &__content {
-            padding-top: 40px;
-            padding-bottom: 40px;
-        }
-    }
-}
-@media(min-width: 1240px){
-    .skills {
-        height: 704px;
-    }
-}
-@media(min-width: 1525px){
-    .skills {
-        height: 865px;
-    }
-}
-@media(min-width: 1825px){
-    .skills {
-        height: 1035px;
-    }
-}
-@media(min-width: 2440px){
-    .skills {
-        height: 1435px;
+    .skills{
+        margin: 60px 0;
     }
 }
 </style>

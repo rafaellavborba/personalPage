@@ -21,7 +21,6 @@
             <button class="navbar__nav-link" on:click={() => scrollToSection(section.id)}>
                 {section.name}
             </button>
-        
         {/each}
     </div>
 
@@ -38,6 +37,7 @@
     &__image{
         height: 60px;
         width: 60px;
+
     }
     &__content {
         width: 100%;
@@ -49,11 +49,12 @@
         border: none;
         background-color: transparent;
         padding: 0;
+        box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+
     }
     &__nav-link{
         background-color: transparent;
         border: none;
-        font-size: 0.9rem;
         line-height: 2rem;
         letter-spacing: 1px;
         min-width: 60px;
@@ -84,9 +85,6 @@
             position: absolute;
             left: 20px;
         }
-        &__nav-link{
-            font-size: 1.2rem;
-        }
     }
 }
 @media (min-width: 768px){
@@ -95,7 +93,9 @@
             height: 120px;
             width: 120px;
         } 
-       
+        &__nav-link {
+            font-size: 1.2rem;
+        }
     }
 }
 @media (min-width: 1024px){
@@ -110,6 +110,7 @@
         }
         &__nav-link{
             font-size: 1.4rem;
+            
         }
     }
 }

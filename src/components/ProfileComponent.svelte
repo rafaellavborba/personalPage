@@ -9,7 +9,7 @@
 
 </script>
 
-<section class="profile" class:visible={isVisible} use:observeVisibility={{ id }}>
+<section id={id} class="profile" class:visible={isVisible} use:observeVisibility={{ id }}>
     <div class="container profile__content">
         <div class="profile__text-content">
             <h1>Rafaella Borba</h1>
@@ -37,7 +37,6 @@
     height: auto;
     width: 100%;
     margin: 40px 0;
-    font-size: 1rem;
     transition: all ease-in-out 0.3s;
     transform: scale(1);
     opacity: 0.5;
@@ -53,7 +52,7 @@
     }
     &__image-content{ 
         width: 100%;
-        min-height: 200px;
+        min-height: 145px;
         display: flex;
         flex-direction: column;
     }
@@ -71,16 +70,9 @@
     transition: all ease-in-out 0.5s;
     opacity: 1;
 }
-@media (min-width: 625px){
-    .profile {
-        font-size: 1.2rem;
-    }
-}
 @media (min-width: 1024px){
     .profile{
         margin: 60px 0;
-        font-size: 1.6rem;
-
         &__content{
             flex-direction: row;
         }
